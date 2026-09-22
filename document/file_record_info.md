@@ -1,4 +1,4 @@
-filename\0
+// filename\0
 uint32 logicalSize
 uint32 storedSize
 uint32 unknown2
