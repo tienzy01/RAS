@@ -15,6 +15,9 @@ namespace ras
         if (inputSize < 12)
             throw std::runtime_error("Compressed block too small.");
 
+        if (std::memcmp(input, RAS_CMPHEADER.data(), RAS_CMPHEADER.size()) != 0)
+            throw std::runtime_error("Bad RAS LZSS CMPHEADER. Expected RA->");
+
         const std::uint32_t uncompressedSize = le32(input + 4);
         const std::uint32_t compressedSize   = le32(input + 8);
 
