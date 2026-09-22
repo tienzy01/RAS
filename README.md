@@ -104,7 +104,7 @@ The format is being reconstructed through reverse engineering of the original Re
 
 Work in progress.
 
-Some fields and behaviors are still being investigated.
+Some fields and behaviors are still being reverse-engineered.
 
 ## License
 
