@@ -70,8 +70,8 @@ Requirements:
 - C++20 compiler
 
 ```bash
-cmake -S . -B build
-cmake --build build --config Release
+cmake -S . -B build // or just cmake -B build
+cmake --build build --config Release // or Debug
 ```
 
 The executable is placed in:
