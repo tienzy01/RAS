@@ -31,10 +31,6 @@ namespace ras
             Pseudocode:
                 memset(&R_File::text_buf, 32, 4078);
                 write position = 4078;
-
-            Burada tüm 4096 byte'ı space ile dolduruyoruz.
-            Orijinal kod sadece ilk 4078 byte'ı initialize ediyor,
-            ama valid arşivlerde kalan 18 byte'ın okunmaması gerekiyor.
         */
         std::array<std::uint8_t, 4096> ring{};
         ring.fill(0x20);
@@ -83,7 +79,6 @@ namespace ras
                     return out;
             }
 
-            // Match token: 2 byte
             if (i >= payloadEnd)
                 break;
 

@@ -49,7 +49,7 @@ namespace ras
     };
 
     // IDA: R_File::CRYPTHEADER -> "RC->"
-    // Not: Bu .ras için değil, ayrı encrypted container gibi görünüyor.
+    // Note: it's likely that the original code used "RC->" as a header for encrypted data, but this is not used in the current implementatio
     static constexpr std::array<std::uint8_t, 4> RAS_CRYPTHEADER
     {
         {
@@ -98,14 +98,14 @@ namespace ras
 
     struct RasDirectoryEntry
     {
-        std::string   name;       // Full path, trailing backslash: "\data\console\"
+        std::string   name;       // full path, trailing backslash: "\data\console\"
         RasTimestamp  timestamp{};
-        std::uint32_t id = 0;     // Sequential directory blob index
+        std::uint32_t id = 0;     // sequential directory blob index
     };
 
     struct RasFileEntry
     {
-        std::string   name;       // Leaf filename: "file.pcx"
+        std::string   name;       // leaf filename: "file.pcx"
         std::string   key;        // "%05i" + name: "00002file.pcx"
 
         std::uint32_t dirId = 0;
@@ -175,10 +175,10 @@ namespace ras
     }
 
     /*
-        R_File::sub_100126A0 karşılığı.
+        R_File::sub_100126A0
 
-        Bu gerçek Unix timestamp değildir.
-        Remedy'nin kendi pseudo-timestamp hesabıdır.
+        This is not a standard timestamp format, but rather Remedy's own pseudo-timestamp calculation.
+        It's used to pack a RasTimestamp into a single 32-bit integer for storage in the archive.
 
         Formula:
             second
@@ -287,7 +287,7 @@ namespace ras
         {
             const unsigned char c = static_cast<unsigned char>(ch);
 
-            // Control characters ve Windows geçersiz karakterleri temizle.
+            // Control characters and reserved characters for Windows paths are replaced with '_'.
             if (
                 c < 32 ||
                 c == '/' || c == '\\' || c == ':' ||
@@ -343,4 +343,4 @@ namespace ras
         return outDir / rel;
     }
 
-} // namespace ras
+}

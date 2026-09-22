@@ -56,7 +56,7 @@ namespace ras
     }
 
     /*
-        R_File::decryptWithSeed karşılığı.
+        R_File::decryptWithSeed
 
         Pseudocode:
             if (!a4) a4 = 1;
@@ -68,10 +68,10 @@ namespace ras
                 a4 = 171 * a4 - 30269 * (a4 / 177);
             }
 
-        Önemli:
-            - seed 32-bit signed int gibi davranmalı.
-            - C++ signed overflow UB olduğu için int64_t ara işlem kullanıyoruz.
-            - Sonuç 32-bit'e wrap ediliyor.
+        check:
+            - if seed == 0, seed = 1 as per original code
+            - Since signed overflow in C++ results in undefined behavior, we use int64_t for intermediate calculations.
+            - The result is wrapped to 32 bits.
     */
     void decryptWithSeed(
         std::uint8_t* data,

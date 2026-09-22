@@ -7,7 +7,7 @@
 namespace ras
 {
     /*
-        R_File::decompress karşılığı.
+        R_File::decompress
 
         Compressed block format:
             +0x00 4 byte  CMPHEADER, currently "RA->"
@@ -15,7 +15,7 @@ namespace ras
             +0x08 uint32  compressed payload size
             +0x0C payload
 
-        expectedSize == 0 ise block header içindeki uncompressed size kullanılır.
+        expectedSize == 0 means "use the uncompressed size from the header".
     */
     std::vector<std::uint8_t> lzssDecompress(
         const std::uint8_t* input,
