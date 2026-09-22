@@ -1,62 +1,88 @@
-A C++20 reimplementation and analysis tool for Remedy's Archive System (RAS), originally used by Max Payne.
+# Intro
 
-The project aims to reproduce the RAS filesystem and binary layout as closely as possible while providing tooling for inspecting, auditing, and extracting archives.
+A C++20 reimplementation and analysis tool for Remedy's Archive System (RAS), originally used by **Max Payne**.
 
-Features
-RAS archive parsing
-Header and metadata inspection
-File and directory listing
-File extraction
-CRC verification
-RAS encryption/decryption support
-LZSS decompression
-Game-compatible entry sorting
-Archive structure auditing
-Archiver ID validation
-Padding validation
-Usage
+The project aims to reproduce the RAS filesystem and binary layout as closely as possible while providing tools for inspecting, auditing, and extracting archives.
+
+## Features
+
+- RAS archive parsing
+- Header and metadata inspection
+- File and directory listing
+- File extraction
+- CRC verification
+- Encryption/decryption support
+- LZSS decompression
+- Game-compatible entry sorting
+- Archive structure auditing
+- Archiver ID validation
+- Padding validation
+
+## Usage
+
+```text
 ras_tool <archive.ras> [info]
 ras_tool <archive.ras> list [count]
 ras_tool <archive.ras> extract <output_dir>
 ras_tool <archive.ras> audit
-Options
---no-crc
---sort
---require-archiver
---strict-padding
-Examples
+```
+
+## Options
+
+```text
+--no-crc              Disable CRC verification.
+--sort                Sort entries like the game loader.
+--require-archiver    Require archiver ID == 3.
+--strict-padding      Validate archive padding.
+```
+
+## Examples
 
 Inspect an archive:
 
+```bash
 ras_tool x_data.ras info
+```
 
 List files:
 
+```bash
 ras_tool x_data.ras list 100
+```
 
 Extract an archive:
 
+```bash
 ras_tool x_data.ras extract extracted/
+```
 
-Run an archive audit:
+Audit an archive:
 
+```bash
 ras_tool x_data.ras audit
-Building
+```
+
+## Building
 
 Requirements:
 
-CMake 3.20+
-C++20 compiler
+- CMake 3.20+
+- C++20 compiler
 
-Build with CMake:
-
+```bash
 cmake -S . -B build
 cmake --build build --config Release
+```
 
 The executable is placed in:
 
+```text
 build/bin/
-Project Structure
+```
+
+## Project Structure
+
+```text
 src/
 ├── ras_main.cpp
 ├── ras_archive.cpp
@@ -66,18 +92,20 @@ src/
 ├── ras_crypto.hpp
 ├── ras_lzss.cpp
 └── ras_lzss.hpp
-Goal
+```
 
-This is primarily a reverse-engineering and reimplementation project.
+## Goal
 
-The main goal is binary compatibility with the original Remedy Archive System: understanding the format, reproducing its filesystem behavior, and eventually generating archives that match the original implementation as closely as possible.
+The main goal is **1:1 reimplementation of the Remedy Archive System**, including its filesystem behavior and binary layout.
 
-Status
+The format is being reconstructed through reverse engineering of the original Remedy implementation and existing RAS archives.
+
+## Status
 
 Work in progress.
 
-The format is being reconstructed from the original game binaries and RAS archives. Some fields and behaviors may still be under investigation.
+Some fields and behaviors are still being investigated.
 
-License
+## License
 
-This project is an independent reverse-engineering effort and is not affiliated with or endorsed by Remedy Entertainment.
+Independent reverse-engineering project. Not affiliated with or endorsed by Remedy Entertainment.
